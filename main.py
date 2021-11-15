@@ -100,27 +100,83 @@ def open_special_file(filename):
                 volume_label = row[3]
 
             else:
-                time_data.append(row[0])
-                temp_data.append(row[1])
-                pressure_data.append(row[2])
-                volume_data.append(row[3])
+                time_data.append(float(row[0]))
+                temp_data.append(float(row[1]))
+                pressure_data.append(float(row[2]))
+                volume_data.append(float(row[3]))
     return(time_label, time_data, temp_label, temp_data, pressure_label, pressure_data, volume_label, volume_data)
 
 
 def draw_subplot(r, c, time_label, time_data, temp_label, temp_data, pressure_label, pressure_data, volume_label, volume_data):
 
-    time_min =
+    temp_avg = 0
+    pressure_avg = 0
+    volume_avg = 0
+
+    x = 0
+
+    time_min = min(time_data)
+    time_max = max(time_data)
+
+    temp_min = min(temp_data)
+    temp_max = max(temp_data)
+
+    pressure_min = min(pressure_data)
+    pressure_max = max(pressure_data)
+
+    volume_min = min(volume_data)
+    volume_max = max(volume_data)
+
+    for num in temp_data:
+        x += 1
+        temp_avg += int(num)
+
+    temp_avg /= x
+
+    x = 0
+
+    for num in pressure_data:
+        x += 1
+        pressure_avg += int(num)
+
+    pressure_avg /= x
+
+    x = 0
+
+    for num in volume_data:
+        x += 1
+        volume_avg += int(num)
+
+    volume_avg /= x
+
+    x = 0
 
     plt.subplot(r, c, 1)
-    plt.plot(time_data, temp_data)
-    plt.xlabel(time_label
-    plt.ylabel = temp_label
 
-    plt.axis([, xmax, ymin, ymax])
+    plt.plot(time_data, temp_data)
+    plt.xlabel = time_label
+    plt.ylabel = temp_label
+    plt.axis([time_min, time_max, temp_min, temp_max])
+
+    plt.axhline(y = temp_avg,color = 'r', linestyle = '-')
 
     plt.subplot(r,c,2)
 
+    plt.plot(time_data, pressure_data)
+    plt.xlabel = time_label
+    plt.ylabel = pressure_label
+    plt.axis([time_min, time_max, pressure_min, pressure_max])
+
+    plt.axhline(y=pressure_avg, color='r', linestyle='-')
+
     plt.subplot(r, c , 3)
+
+    plt.plot(time_data, volume_data)
+    plt.xlabel = time_label
+    plt.ylabel = volume_label
+    plt.axis([time_min, time_max, volume_min, volume_max])
+
+    plt.axhline(y=volume_avg, color='r', linestyle='-')
 
     plt.show()
 
