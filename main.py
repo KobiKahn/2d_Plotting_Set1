@@ -5,6 +5,7 @@ def open_file(file_name):
     x = []
     y = []
 
+
     with open(file_name) as file:
 
         for row in file:
@@ -20,6 +21,7 @@ def open_file(file_name):
                 y.append(float(row[1]))
 
         return x, y, xlabel, ylabel
+
 
                                                                  #############
                                                 ################## PROBLEM 1 ##################
@@ -79,6 +81,52 @@ def plot_data(x, y, title, xlabel, ylabel, plot_code):
 # plot_data(x, y, 'KOBIS GRAPH', xlabel, ylabel, 'or')
 
 ###### 3
-x, y, xlabel, ylabel = open_file('Jacob Kahn - time_temp_pressure_volume.txt')
+
+def open_special_file(filename):
+    x = 0
+    time_data = []
+    temp_data = []
+    pressure_data = []
+    volume_data = []
+    with open(filename) as file:
+
+        for row in file:
+            row = row.split()
+            x += 1
+            if x == 1:
+                time_label = row[0]
+                temp_label = row[1]
+                pressure_label = row[2]
+                volume_label = row[3]
+
+            else:
+                time_data.append(row[0])
+                temp_data.append(row[1])
+                pressure_data.append(row[2])
+                volume_data.append(row[3])
+    return(time_label, time_data, temp_label, temp_data, pressure_label, pressure_data, volume_label, volume_data)
 
 
+def draw_subplot(r, c, time_label, time_data, temp_label, temp_data, pressure_label, pressure_data, volume_label, volume_data):
+
+    time_min =
+
+    plt.subplot(r, c, 1)
+    plt.plot(time_data, temp_data)
+    plt.xlabel(time_label
+    plt.ylabel = temp_label
+
+    plt.axis([, xmax, ymin, ymax])
+
+    plt.subplot(r,c,2)
+
+    plt.subplot(r, c , 3)
+
+    plt.show()
+
+
+
+
+time_label, time_data, temp_label, temp_data, pressure_label, pressure_data, volume_label, volume_data = open_special_file('Jacob Kahn - time_temp_pressure_volume.txt')
+
+draw_subplot(3, 1, time_label, time_data, temp_label, temp_data, pressure_label, pressure_data, volume_label, volume_data)
